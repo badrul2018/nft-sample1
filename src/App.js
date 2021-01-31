@@ -3,36 +3,48 @@ import {
   ChakraProvider,
   Box,
   Text,
-  Link,
   VStack,
-  Code,
   Grid,
   theme,
+  Flex,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
 
+
+import GradientBackground from './components/GradientBackground';
+import NavBar from './components/NavBar';
+import ProductContainer from './ProductContainer';
+
+const newTheme = {
+  ...theme,
+  config: {
+    initialColorMode: "dark",
+    useSystemColorMode: false,
+  }
+}
 function App() {
+  
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={newTheme}>
+    
       <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
+      <GradientBackground/>
+      <NavBar/>
+      
+        <Grid minH="100vh" pt={15} >
+         
+          <VStack spacing={8} >
+           
+            <Text fontSize="6xl" as='b'  mt={10} textTransform='uppercase' color='white' display={{base:'none',md:'block'}}>
+              Welcome to NFT Alley.
             </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
           </VStack>
+          <Box textAlign='left' ml={10} mb={30} mt={150} fontSize="2xl">
+          <Text>Products</Text>
+          <Flex mt={30}>
+          <ProductContainer/>
+          </Flex>
+          
+          </Box>
         </Grid>
       </Box>
     </ChakraProvider>
